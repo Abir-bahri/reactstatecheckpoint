@@ -13,22 +13,25 @@ class App extends React.Component {
         profession: "electronics engineer",
         date: new Date()
       },
-      show: true
+      show: true,
+      counter : 0
     };
   }
-  
+  componentDidMount() {
+    this.setState(
+      {
+        intervall: setInterval(
+          ()=>{this.setState({counter: this.state.counter + 1})
+          ;},1000
+      )
+  })}
     handleShowPerson = () => {
       this.setState({
         ...this.state,
         show: !this.state.show
       });
     };
-    componentDidMount() {
-      this.timerID = setInterval(
-        () => this.tick(),
-        1000
-      );
-    };
+    
    
     
   
@@ -52,11 +55,13 @@ class App extends React.Component {
             </>
            
           )}
-          <h2>It is {this.state.date}.</h2>
+          
           <button onClick={this.handleShowPerson}>click me</button>
+          {this.state.counter}
         </div>
       );
     }
+   
   }
   
 
